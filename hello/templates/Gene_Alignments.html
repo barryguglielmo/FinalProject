@@ -1,0 +1,144 @@
+{% extends "FP_Header.html" %}
+
+{% load staticfiles %}
+{% block content %}
+<body>
+<center>
+<h2>LGI2 Gene Alignments</h2>
+<br><br><br>
+</center>
+<div class = "col-2-8">
+<!--
+Databases Possible:
+NCBI: Gene
+RefSeq
+Emboss (global alignment)
+Argo (annotation and visuialization of whole genome)
+SNAP
+SignalP
+mFinder
+mDraw
+GeneMark.hmm
+repeat masker
+repeat scout
+
+Web-Tools Possible:
+
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+Databases Used:
+
+Web-Tools Used:
+
+
+
+
+
+-->
+<center><font size = 5>
+<p> The LGI2 gene has two isoforms, let us call the LGI2(1x) and LGI2(2x). To address the differences between isoforms a pairwise
+	alignmnet was done. The LGI2(1x) isoform is 331 amino acids long while the LGI2(2x) isoform is only 287 amino acids long. This sizable 
+	difference in length could result in the loss of motifs. To address this I used MotifFinder.<br>
+	
+	<!--image here-->
+	
+	From Figure 1 it does not appear that there are any missing LRR domains between LGI2(1x) and LGI2(2x). Because there are no missing
+	motifs I decided to do a Smith and Waterman local alignment (rather than a global alignment Needleman and Wunch). Alignments were
+	done using Emboss Water choosing the Nucleotide function.
+	
+	<!--image here-->
+	
+	From Figure 2 the pairwise alignment we see there are no gaps, however the identity is only 64.4% and the similarity is 20.9%.
+	These stark differences may play a role in how these isoforms behave, and this in turn might effect an individual disease status.	
+	
+	To address the difference in isoform and disease status I turned to the literature on LGI2. This quickly turned me toward the EPTP domain <!--https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pubmed/?term=LGI2+isoforms-->
+	which can be seen in Figure 1. This domain and the EPTP superfamily has been found to be implicated in epileptic disorders and defness. <!--http://www.cell.com/trends/biochemical-sciences/pdf/S0968-0004(02)02163-1.pdf-->
+	Using Python I did a sequence alignment of the EPTP domain which is located from amino acid 219-260 in both isoforms of LGI2. These two sections
+	of the protein structure are identicle. It appears that the motifs in both isoforms are identicle. 
+	<!--link to python script-->
+	<br><br>
+	Because both isoforms of the LGI2 protein in the NCBI database appear the same I need to turn back to literature to figure out what mutations
+	might be disease causing. A study by Vachiranee Limviphuvadh et al <!--https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949613/-->
+	Found that there were 4 SNP mutations that were associated with epilepsy. These mutations are K347E, V420E, R444Q, and Q452R.
+	All of these SNP's are located in epilepsy-associated repeat regions (EAR) propeller region and 
+	presumably interact with ADAM metalloproteases. Additionally SNP 124T in the N-terminal region of the signal peptide was found to be 
+	associated with epilepsy.
+	<br><br>
+	To see if I could find regions of the protein that were most likely to be spliced I used SignalP. I found a splice site between amino acid positions 22 and 23
+	when looking at the first 70 amino acids, however when looking at the protein in its entierty I found that there was also a splice site between positions 29 and 30.
+	I was hoping to see a splice site in the EPTP domain, however this was not the case. Lining the results of MotifFinder with SignalP we can see that these splice
+	sites are in the _____ (WHAT IS THE NAME OF THIS REGION???) region.
+	
+	
+	<!--image SignalP here-->
+	
+	
+	
+	LGI2 is secreted in many different cell types, however we are most interested in its function in brain due to its relationship with epilepsy.
+	In brain LGI2 is secreted by neurons into the extracellular space and cell lysate and acts on metalloproteinase-lacking members of the A Disintegrin and metalloproteinase domain-containing protein (ADAM) 
+	family of neuronal receptors, which function in synapse remodeling, and that LGI2 truncation prevents secretion and ADAM interaction. 
+	https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pubmed/21829378
+	
+	good 3D model
+	
+	Beta propeller conserved in LGI family, this is the part that most likely interacts with the ADAM protein and thus mutations in the beta propeller
+	can be detramental to the proteins function.
+	https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pmc/articles/PMC2949613/
+
+
+
+
+
+
+
+
+	LGI linked epilepsy has been observed in dogs, which got me thinking: How good of a model organism is a dog for LGI2 study?
+	To better understand the relationship of the LGI2 gene across species and determine if it was well conserved I made a few multiple sequence alignments of mRNA. 
+	mRNA is a better proxy than DNA for the actual gene products because mRNA does not contain introns, so the full mRNA sequence is 
+	translated into the amino acid sequence of the protein. ClustalOmega was used to make multiple sequence alignments.
+	<br><hr><br>
+	
+	For the first alignment I gave the software an easy test by comparing the mRNA from animal pairs that are known
+	to be similar; Human, Chimpanzee, House Mouse, and Norwegain Rat. The mRNA sequences were obtained from the NCBI
+	RefSeq database. Figure 1 shows the clatogram the ClustalOmega software built.<br><hr><br>
+	
+
+	
+	<img src='{% static "imgs/PyloHMMR.png" %}' alt = "PhyloHmmr" style = "width:900px;height:300px;">
+	<br><hr><br>
+	
+	<p> From figure 1 we can see that the human and chimp LGI2 mRNA are more simalar to eachother
+	than they are to the mouse and rat.<br> However, that is no surprise! Epilepsy in dogs has been found to be associated with 
+	LGI2 mutations, so I wanted to explore the possibility of using different animal models of LGI2 mutations. To test this I used the mRNA code 
+	for Human, Mouse, Chicken, Dog, and Cow. <br><hr><br>
+	</p>
+	
+	<img src='{% static "imgs/PhyloHMCC.png" %}' alt = "PhyloHMCC" style = "width:900px;height:300px;"><br><br>
+	<p> From figure 2 it appears that humans LGI2 gene is more similar to that of a cow than to 
+	a Rat. This could suggest that a better model organism for LGI2 study would be with cows.
+	
+	<br><br>	
+	Figure 3 
+	To confirm the relation between a Human and Rat or Cow a pairwise alignment was done.<br>
+	Alignment Scores (Made using EMBOSS Needle)<br><!--make this a table -->
+	Human : Dog     = <br>
+	Human : Cow     = <br>
+	Human : Rat     = <br>
+	
+	Looking at these alignments we see that the cow still appears as a more relevant choice if we were conducting an animal study. 
+	However, studies with large organisms with relatively long lifespans such as cows may not be the best rout.
+	 <br><br><br>
+
+	
+	
+	
+	</p></font>
+<h5>Discussion</h5>
+
+</center>
+</div>
+</body>
+<!--Links to databases and tools USED** and Possible -->
+
+{% endblock %}

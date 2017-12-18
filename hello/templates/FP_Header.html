@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<title>Final Project</title>
+	<meta charset="utf-8" />
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type = "text/css"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/navbar-fixed-side.css" rel="stylesheet" />
+	
+	<style type="text/css">
+		html,
+		body {
+		  height:100%
+		}
+	</style>
+</head>
+
+<body class="body" style="background-color:#ADD8E6">
+
+	<div class="container-fluid" style="min-height:95%; background-color: #fff">
+	
+		<div class="row">
+			  <div class="col-sm-2">
+				  <br>
+				  <center>
+				  <!--LOGO GOES HERE-->
+					<img src="{% static 'imgs/prot.png' %}" class="responsive-img" style='max-height:100px;' alt="prot">
+				  </center>
+			  </div>
+			  <div class="col-sm-8">
+				  <br>
+				  <center>
+				  <h1 id = "Intro">Leucine Rich Repeat (LGI)</h1>
+				  <h2> Family Member 2 </h2>
+				  </center>
+			  </div>
+			  <div class="col-sm-2">
+				  <br>
+				  <center>
+				  <!--LOGO GOES HERE-->
+					<img src="{% static 'imgs/prot2.png' %}" class="responsive-img" style='max-height:100px;' alt="prot">
+				  </center>
+			  </div>
+			  
+		</div><hr>
+			
+		<div class="row">
+		  <div class="col-sm-12">
+		  <br>
+			 <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> 
+				<a href='/' class='button'>Home</a>
+				<a href='/links/'class = 'button'>Links</a>
+				<a href='/FP_Home/' class = 'button'>Final Project</a>
+				<a href='/contact/'class = 'button'>Contact</a>
+				<a href='/About/'class = 'button'>About</a>
+			</nav>
+			</div>
+			</div><hr>
+			
+			<div>
+			
+			
+			<div>
+			  <ul>
+			  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12">
+      <nav class="navbar navbar-default navbar-fixed-side">
+        <!-- normal collapsible navbar markup -->
+		<a href='#'class = 'button1' align = center target = "_top">Intro</a><br>
+		<a href= "#Motif" class = 'button1'align = center >Motifs and Domains</a><br>
+		<a href="#Mutations" class = 'button1' align = center>Mutations</a><br>
+		<a href='#Model'class = 'button1'align = center>Model Organisms</a><br>
+		<a href='#Discussion'class = 'button1'align = center >Conclusion</a><br>
+		<a href='#References' class = 'button1'align = center >References</a><br>
+      </nav>
+    </div>
+    <div class="col-sm-9 col-lg-10">
+      <!-- your page content -->
+    </div>
+  </div>
+</div>
+				
+				
+			
+
+			  </ul>	
+			
+			</div>
+		
+			<!--block worked-ish here (nothing broke, but they wouldnt change)-->
+			{% block content %}
+            {% endblock %}
+			</div>
+			
+		  </div> 
+		
+		</div> 
+</body>
+	<footer>
+		<div class="container-fluid" style='margin-left:15px'>
+			<p><a href="#Intro" target="blank">Top of Page</a> | <a href="#" target="blank">LinkedIn</a> | <a href="#" target="blank">Twitter</a> | <a href="#" target="blank">Google+</a></p>
+		</div>
+	</footer>	
+	
+
+
+</html>

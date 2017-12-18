@@ -1,0 +1,189 @@
+{% extends "FP_Header.html"%}
+{% load staticfiles %}
+{% block content %}
+<style>
+p.ex {
+	height: auto;
+    width: 600px;
+	}
+</style>
+<body>
+<center>
+<h3>LEUCINE RICH REPEAT LGI FAMILY MEMBER 2 <br>
+	(LGI2)</h3><br><br>
+<div class = "center-col">
+
+<p class= "ex"><font size =4> 
+<text><b><u>Intro</u></b></text> <br><br>
+The LGI2 gene codes for the LGI2 protein which has two isoforms (let us call them LGI2(1x) and LGI2(2x)). For this project assume that I am reffering to LGI2(1x) unless specifically stated.<br><br>
+ The LGI2 protein has been observed to play a role in the development of epilepsy. 
+LGI2 is part of the LGI family which has 4 known members (LGI1, LGI2, LGI3, and LGI4) and the LGI family is part of the Leucine-rich repeat (LRR) superfamily. The LRR superfamily has characteristic 
+α/β horseshoe fold motif [1]. <br><br>The LGI family plays a variety of roles in neurological function and development. The LGI2 gene is most closely related to its sister gene LGI1 which is known to play a 
+role in epilepsy, which is what first lead researchers to pursue LGI2 as a candidate protein for epilepsy studies.
+<br><br>
+ For my project I decided to utilize the web based tools to do my own analysis of LGI’s 
+DNA, mRNA, Protein structure, protein-protein interactions. To anylize LGI2’s DNA and mRNA I used MUSCLE, Emboss, and Python for pairwise and multiple sequence alignments. To better understand
+ LGI2’s protein structure I used MotifFinder and SignalP. To better understand the current research and protein-protein interactions I used NCBI Gene, PubMed, and Protein databases. 
+ <br><br>
+ Lastly, LGI2 is conserved in several different organisms, but most of the LGI2 studies outside of Homo sapiens have been done with dogs.
+ I wanted to know if dogs were in fact the most similar non-primate organisms for LGI2 study. 
+ The results of my analysis are below. Feel free to use the menu above to jump to any section of this project.
+	
+</p>	
+<br><br><br>
+<p id = "Motif"><b><u>Motifs and Domains</u></b></p> <br><br>
+<img src='{% static "imgs/LRR_HorseShoe_Domain.jpg" %}' alt = "horseshoe" style="width:400px;height:400px;">
+<!--[1]This image link is http://onlinelibrary.wiley.com.ezp-prod1.hul.harvard.edu/doi/10.1002/prot.10605/abstract;jsessionid=FE465135717D2AAE65ACCD6A7FAEF636.f04t04 -->
+<!--Structural principles of leucine-rich repeat (LRR) proteins......Purevjav Enkhbayar-->
+<br>
+<h6>Figure 1. This image was taken from "Structural principles of leucine-rich repeat (LRR) proteins"; Purevjav Enkhbayar et al.</h6>
+<br><br><br><br>
+<p class= "ex"><font size =4>Figure 1 demonstrates the LRR α/β horseshoe fold motif. These folds are  typically  20–30 amino acids long and these domains fold into a horseshoe shape with a parallel β-sheet on the 
+	concave face and with various secondary structures, including α-helix, 310-helix, and pII helix on the convex face [1].<br><br> To find where these domains (or more accurately motifs) exist in the LGI2 protein
+	I used MotifFinder. From Figure 2 we can see that there were 5 motifs found. There were 4 LRR motifs found (LRR_4, LRR_5, LRR_8 and LRR_9) and 1 EPTP motif. Turning again to literature
+	The EPTP domain has been implicated with LGI1/Epitempin gene that causes autosomal dominant lateral temporal epilepsy [2]. <!--http://www.cell.com/trends/biochemical-sciences/pdf/S0968-0004(02)02163-1.pdf-->
+	This suggests that mutations or alterations in the EPTP domain of 	LGI2 may have a similar effect. 
+	<br><br>
+	In order to better understand the differences between the two isoforms 
+	I ran MotifFinder on both of them. There were no missing motifs even though LGI2(2x) is 44 amino acids shorter than LGI2(1x).
+	<br><br><br>
+	<img src='{% static "imgs/LGI2_1x_MotifFinder.png" %}' alt = "motiffinder" style="width:600px;height:600px;">
+	<br><br><br>
+	Though all motifs are present in both LGI2(1x) and LGI2(2x) this does not mean that the sequences for each motif are identical. To check if they were identical I used Python to align 
+	the regions in which we find each motif. This was done by using Biopython and SeqIO to parse the fasta files obtained on RefSeq then defining a simple function that would do a 
+	local alignment of the sequences. My python code can be found in the "Python Code" link of the menu. 
+	<br><br>
+	There were no observable differences in motif regions. This would suggest that
+	the isoforms that were provided through RefSeq are the common non-disease related forms of the LGI2 mRNA and Protein. As a final precaution I decided to use BLAST Nucleotide to do 
+	a Smith and Waterman local alignment of the two isoforms of LGI2. Figure 3 shows the results of the BLAST alignment and the fact that there are no differences between the two isoforms
+	in the motif regions.
+	<br><br><br>
+	<img src='{% static "imgs/BLAST_align.png" %}' alt = "BLAST_align" style="width:600px;height:500px;">
+	<br><text>Figure 3</text><br><br>	
+	<!--The LGI1 gene involved in lateral temporal lobe epilepsy belongs to a new subfamily of leucine-rich repeat proteins. Gu W et al. -->
+	
+	 <!-- More on EPTP https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pubmed/?term=LGI2+isoforms-->
+
+	<br><br><text id = "Mutations"><b><u>Mutations</u></b></text> <br><br>
+	Because both isoforms of the LGI2 protein in the NCBI database appear to have the same necessary motifs and domains I need to turn back to literature to figure out what mutations
+	might be disease causing. A study by Vachiranee Limviphuvadh et al 
+	Found that there were 4 SNP mutations in the LGI2 gene that were associated with epilepsy. These mutations are K347E, V420E, R444Q, and Q452R.
+	All of these SNP's are located in epilepsy-associated repeat regions (EAR) propeller region and 
+	presumably interact with A Disintegrin and metalloproteinase domain (ADAM) metalloproteases. Additionally SNP 124T in the N-terminal region of the signal peptide was found to be 
+	associated with epilepsy [3].<!--https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949613/--><br><br><br>
+	<img src='{% static "imgs/LGI2_SNPs.png" %}' alt = "BLAST_align" style="width:700px;height:200px;">
+	<br><text>Figure 4</text><br><br>	
+	
+	<br><br>
+	To see if I could find regions of the protein that were most likely to be spliced, and hopefully 
+	find some overlap with the known SNPs I utilized the SignalP web software. 
+	<br><br>
+	I found a splice site between amino acid positions 22 and 23
+	when looking at the first 70 amino acids, however when looking at the protein in its entirety I found that there was also a splice site between positions 29 and 30.
+	I was hoping to see a splice site in the EPTP domain, however this was not the case. Lining the results of MotifFinder with SignalP we can see that these splice
+	sites are in the N-terminal region, with a slight spike in the S and Y scores where the LRR domains appear to overlap.
+	
+	<br><br><br>
+	<img src='{% static "imgs/SignalP and Motif Finder.png" %}' alt = "SignalP and Motif Finder" style="width:500px;height:600px;">
+	<br><text>Figure 5</text><br><br>	<br><br>		
+	
+	LGI2 is secreted in many different cell types, however we are most interested in its function in brain due to its relationship with epilepsy. 
+	In brain LGI2 is secreted by neurons into the extracellular space and cell lysate and acts on metalloproteinase-lacking members of the ADAM
+	family of neuronal receptors, which function in synapse remodeling. It is also important to note that LGI2 truncation prevents secretion and ADAM interaction. 
+	<br><br>
+	The beta propeller of LGI2 can be seen in Figure 6 a. Though the LGI2 gene is undergoing much study I have not
+	been able to find any literature that has pieced the puzzle of LGI2's role in epilepsy in its entirety. 
+	From further reading I found that the beta propeller domain is conserved in LGI family, and that this is the part of the protein that most 
+	likely interacts with the ADAM protein and thus mutations in the beta propeller	can be detrimental to the proteins function [4].
+<!--	https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pmc/articles/PMC2949613/-->
+	<br><br>
+	
+	<br><br>
+	<img src='{% static "imgs/3D.png" %}' alt = "3D" style="width:250px;height:600px;">
+<br><text>Figure 6</text><br><br>	
+	
+	
+	
+	<br><br><br>
+	
+<!--********************************************************-->
+	<!--https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pubmed/21829378-->
+	
+
+
+
+
+
+	<text id = "Model"><b><u>Model Organisms</u></b></text> <br><br>
+	Interestingly, LGI linked epilepsy has also been observed in dogs, which got me thinking: How good of a model organism is a dog for LGI2 study?
+	To better understand the relationship of the LGI2 gene across species and determine if it was well conserved I made a few multiple sequence alignments of mRNA. 
+	mRNA is a better proxy than DNA for the actual gene products because mRNA does not contain introns, so the full mRNA sequence is 
+	translated into the amino acid sequence of the protein. MUSCLE was used to make multiple sequence alignments.
+
+	<br><br>
+	For the first alignment I gave the software an easy test by comparing the mRNA from animal pairs that are known
+	to be similar; Human, Chimpanzee, House Mouse, and Norwegain Rat. The mRNA sequences were obtained from the NCBI
+	RefSeq database. Figure 7 shows the clatogram the MUSCLE software built.
+	<br><br><br>
+	<img src='{% static "imgs/hmmr.png" %}' alt = "PhyloHmmr" style = "width:600px;height:100px;">
+	<br><text>Figure 6</text><br><br>
+
+	
+	From figure 7 we can see that the human and chimp LGI2 mRNA are more similar to each other
+	than they are to the mouse and rat. However, that is no surprise! Epilepsy in dogs has been found to be associated with 
+	LGI2 mutations, so I wanted to explore the possibility of using different animal models of LGI2 mutations. To test this I used the mRNA code 
+	for Human, Rat, Chimp, Dog, and Cow. <br><br>
+	
+	
+	<img src='{% static "imgs/combo_orgs.png" %}' alt = "combo_orgs" style = "width:600px;height:100px;">
+	<br><text>Figure 8</text><br><br>
+	 From figure 8 it appears that humans LGI2 is more similar to a rat than to the other organisms. This makes sense seeing as we often use rats for 
+	 genetic studies. It is comforting to see that the rat LGI2 mRNA is not drastically different than ours. To see if there were any major discrepancies
+	 between humans and rats I did a pair wise alignment using Emboss Protein Needleman and Wunch.
+	
+	<br><br>
+	A pairwise alignment was done between Human and Rat then for Human and Dog. From the mRNA alignments it appeared that Rat would have a more similar prtoein, however,
+	the pairwise alignments suggest that the LGI2 protein of the dogs are more closely related to human. I believe this is why there have been studies connecting
+	dogs a pairwise alignment was done for the organisms LGI2 protein. After doing these pairwise alignments
+	dogs seem to be more similar to humans than rats. See figure 9.
+	
+	<br><br><br>
+		<img src='{% static "imgs/pair.png" %}' alt = "pair" style = "width:500px;height:200px;">
+	<br><text>Figure 9</text><br><br>
+	In conclusion rat's have a more similar LGI2 mRNA sequence to a human's mRNA than dog's mRNA, however, the LGI2 protein of dog's is more similar to human's than 
+	a rat's protein. I would imagine this was taken into consideration when studies on LGI linked epilepsy began. 
+	<br><br><br>
+	
+	<text id = "Discussion"><b><u>Discussion</u></b></text> <br><br>
+	LGI1 and LGI2 have been found to be implicated in epilepsy both in humans and in dogs. Mutations in the EPTP or beta propeller domain can result in phenotypic alterations
+	of the host organism. In order to find definitive genetic markers of LGI2 associated epilepsy an epidemiological study of LGI2 mRNA would be necessary. In order for me to 
+	further my own study of this gene I would need access to both genetic and phenotype records. The European database on epilepsy called Epilepsiae is one such database that could be
+	useful and contains 100 annotated datasets thus far. I did not have time to utilize or use this information in my project. <br><br>
+	
+	<text id = "References"><b><u>References</u></b></text> <br><br>
+	
+	</p>
+	<p class = "ex" align = 'left'>
+	
+	1.) <a href = http://onlinelibrary.wiley.com.ezp-prod1.hul.harvard.edu/doi/10.1002/prot.10605/abstract;jsessionid=FE465135717D2AAE65ACCD6A7FAEF636.f04t04>Structural principles of 
+	leucine-rich repeat (LRR) proteins, Purevjav Enkhbayar et al. Dec. 12, 2003</a><br>
+	2.) <a href = http://www.cell.com/trends/biochemical-sciences/pdf/S0968-0004(02)02163-1.pdf>The novel EPTP repeat defines a superfamily of proteins implicated in epileptic disorders, Eike Staub
+		Sep. 1, 2002</a><br>
+	3.) <a href = https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949613/>Similarity of molecular phenotype between known epilepsy gene LGI1 and disease candidate gene LGI2, Vachiranee Limviphuvadh et al.
+		Sep. 24, 2010</a><br>
+	4.) <a href =  https://www-ncbi-nlm-nih-gov.ezp-prod1.hul.harvard.edu/pmc/articles/PMC3145619/>LGI2 Truncation Causes a Remitting Focal Epilepsy in Dogs, Eija H. Seppälä et al. Jul. 28, 2011</a>
+		<br>
+	5. <a href = https://www.ncbi.nlm.nih.gov/refseq/>RefSeq</a><br>
+	6. <a href = https://www.ebi.ac.uk/Tools/msa/muscle/>MUSCLE</a><br>
+	7. <a href = https://www.ebi.ac.uk/Tools/emboss/>EMBOSS</a><br>
+	8. <a href = https://blast.ncbi.nlm.nih.gov/Blast.cgi>BLAST</a><br>
+	9. <a href = https://github.com/barryguglielmo/FinalProject.git>GitHub With Final Project Python Files and WebSite Files</a>
+	</p>
+	</font>
+	</center>
+	
+	<br><br><br><br><br><br><br><br>
+
+</body>
+
+{% endblock %}

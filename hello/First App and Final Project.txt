@@ -1,0 +1,10 @@
+This is the first app of the website thus far. It contains my final project and the home page templates.
+My to do list is as follows:
+
+get every button on home connecting to at least a blank page saying "under construction"
+Final Project:
+	Hit as many of the databases from class as possible
+	Use Bio Python to explore Entrez and do some fun things (there are many limitations here)
+	use SwissProt, MUSCLE, ncbi, etc
+	write paragraph on the known affects and predicted use of this knowledge (site sources)
+	
